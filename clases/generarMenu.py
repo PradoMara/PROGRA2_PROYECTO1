@@ -1,0 +1,2 @@
+class generarMenu():
+    pass
