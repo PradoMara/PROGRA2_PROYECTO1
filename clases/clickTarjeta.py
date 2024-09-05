@@ -1,8 +1,7 @@
 import customtkinter as ctk
-from crearTarjeta import crear_tarjeta
 
 #codigo de ayuda para desarrollar el evento que se debe gatillar, cuando se presiona cada targeta(Menu)
-def tarjeta_click(self, event, menu):
+def tarjetaClick(self, event, menu):
         # Verificar si hay suficientes ingredientes en el stock para preparar el menú
         if self.stock.lista_ingredientes==[]:
             suficiente_stock=False
