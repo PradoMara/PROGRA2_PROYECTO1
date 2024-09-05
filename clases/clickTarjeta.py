@@ -32,7 +32,7 @@ def tarjetaClick(self, event, menu):
             self.label_total.configure(text=f"Total: ${total:.2f}")
         else:
             # Mostrar un mensaje indicando que no hay suficientes ingredientes usando CTkMessagebox
-            CTkMessagebox(title="Stock Insuficiente", message=f"No hay suficientes ingredientes para preparar el menú '{menu.nombre}'.", icon="warning")
+            CTKMessagebox(title="Stock Insuficiente", message=f"No hay suficientes ingredientes para preparar el menú '{menu.nombre}'.", icon="warning")
 
 
 
