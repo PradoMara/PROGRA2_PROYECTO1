@@ -55,7 +55,7 @@ botonGenerarMenu.pack(pady=10)
 
 #-------------------------------------------------PESTAÑA PEDIDOS-------------------------------------------------------#
 
-# Marco para las tarjetas de menú
+# Definición de tu marco y Treeview
 tarjetas_frame = ctk.CTkFrame(pestañaPedidos)
 tarjetas_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
@@ -66,22 +66,31 @@ pedido_treeview.heading("Cantidad", text="Cantidad")
 pedido_treeview.heading("Precio Unitario", text="Precio Unitario")
 pedido_treeview.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
+# Asegúrate de que la pestañaPedidos se expanda correctamente
+pestañaPedidos.grid_rowconfigure(0, weight=1)
+pestañaPedidos.grid_columnconfigure(0, weight=1)
+pestañaPedidos.grid_rowconfigure(1, weight=1)
+pestañaPedidos.grid_columnconfigure(1, weight=1)
+
+
 # Crear las tarjetas de menú
-menus = [
-    {"nombre": "Papas Fritas", "precio": 500, "icono_menu": "imgs/papas.png"},
-    {"nombre": "Completo", "precio": 1800, "icono_menu": "imgs/completo.png"},
-    {"nombre": "Pepsi", "precio": 1100, "icono_menu": "imgs/pepsi.png"},
-    {"nombre": "Hamburguesa", "precio": 3500, "icono_menu": "imgs/hamburguesa.png"},
+menu = [
+    {"nombre": "Hamburguesa", "precio": 5.00, "icono_menu": "imgs/hamburguesa.png"},
+    {"nombre": "Pepsi", "precio": 2.00, "icono_menu": "imgs/pepsi.png"},
+    {"nombre": "Completos", "precio": 3.00, "icono_menu": "imgs/completos.png"},
+    {"nombre": "Papas", "precio": 3.00, "icono_menu": "imgs/papas.png"},
 ]
 
 # Crear un diccionario para almacenar las imágenes
-imagenes_menus = {}
+imagenes_menus = []
 
-for menu in menus:
-    imagen = Image.open(menu["icono_menu"])
+for item in menu:
+    imagen = Image.open(item["icono_menu"])
     icono_menu = ctk.CTkImage(dark_image=imagen, size=(64, 64))
-    menu["icono_menu"] = icono_menu 
-    crear_tarjeta(menu, tarjetas_frame, pedido_treeview)
+    item_copy = item.copy()
+    item_copy["icono_menu"] = icono_menu
+    crear_tarjeta(item_copy, tarjetas_frame, pedido_treeview)
+
 
 
 # etiqueta para mostrar el precio total
