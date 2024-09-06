@@ -2,15 +2,22 @@ import customtkinter as ctk
 from tkinter import ttk 
 from PIL import Image
 from clases.clickTarjeta import tarjetaClick
-from clases.ingresarIngredientes import ingresarIngrediente
+from clases.ingresarIngredientes import IngresarIngrediente
 from clases.eliminarIngrediente import eliminarIngrediente
 from clases.generarMenu import generarMenu
 from clases.crearTarjeta import crear_tarjeta
 from clases.generarBoleta import generarBoleta
 
+#-----------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------------- Instancia de la aplicación -----------------------------------------#
+#-----------------------------------------------------------------------------------------------------------------------#
+
+ingresoIng = IngresarIngrediente()
+
+
 app = ctk.CTk()
 app.title("Gestión de ingredientes y pedidos")
-app.geometry("800x600")
+app.geometry("800x600") 
 
 frame = ctk.CTkFrame(app)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
@@ -22,12 +29,14 @@ pestañaIngredientes = pestañas.add("Ingreso de Ingredientes")
 pestañaPedidos = pestañas.add("Pedidos")
 
 #--------------------------------------PESTAÑA INGRESO INGREDIENTES---------------------------------------------------#
+#Ingredientes disponibles en el combobox
+ingredienteDisp = ["Papas", "Bebida", "Vienesas", "Pan de Completo", "Tomate", "Palta", "Pan de Hamburguesa", "Lamina de Queso", "Churrasco de Carne"]
 
 # label ingrediente
 etiquetaNombre = ctk.CTkLabel(pestañaIngredientes, text="Nombre del Ingrediente:")
 etiquetaNombre.grid(row=0, column=0, padx=10, pady=10, sticky="w")
 # entrada ingrediente
-entradaNombre = ctk.CTkEntry(pestañaIngredientes)
+entradaNombre = ctk.CTkComboBox(pestañaIngredientes, values=ingredienteDisp)
 entradaNombre.grid(row=0, column=1, padx=10, pady=10)
 # label cantidad
 etiquetaCantidad = ctk.CTkLabel(pestañaIngredientes, text="Cantidad:")
@@ -36,7 +45,7 @@ etiquetaCantidad.grid(row=1, column=0, padx=10, pady=10, sticky="w")
 entradaCantidad = ctk.CTkEntry(pestañaIngredientes)
 entradaCantidad.grid(row=1, column=1, padx=10, pady=10)
 # botón ingresar
-botonIngresarr = ctk.CTkButton(pestañaIngredientes, text="Ingresar Ingrediente", command=lambda: ingresarIngrediente())
+botonIngresarr = ctk.CTkButton(pestañaIngredientes, text="Ingresar Ingrediente", command=lambda: ingresoIng.ingresarIngrediente(entradaCantidad, entradaNombre, tablaAgregados))   
 botonIngresarr.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
 # tabla de ingredientes agregados
