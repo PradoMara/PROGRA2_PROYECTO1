@@ -1,7 +1,7 @@
 
 
 class eliminarIngrediente():
-    
+
     def __init__(self):
         pass
     
