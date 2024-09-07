@@ -2,7 +2,7 @@ import customtkinter as ctk
 from tkinter import messagebox
 
 class eliminarIngrediente():
-    
+
     def __init__(self):
         pass
     

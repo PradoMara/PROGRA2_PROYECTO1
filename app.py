@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from tkinter import ttk 
 from PIL import Image
+from clases.agregarPedido import agregar_al_pedido
 from clases.clickTarjeta import tarjetaClick
 from clases.ingresarIngredientes import ingresarIngrediente
 from clases.eliminarIngrediente import eliminarIngrediente
@@ -86,10 +87,10 @@ pestañaPedidos.grid_columnconfigure(1, weight=1)
 
 # Crear las tarjetas de menú
 menu = [
-    {"nombre": "Hamburguesa", "precio": 5.00, "icono_menu": "imgs/hamburguesa.png"},
-    {"nombre": "Pepsi", "precio": 2.00, "icono_menu": "imgs/pepsi.png"},
-    {"nombre": "Completos", "precio": 3.00, "icono_menu": "imgs/completos.png"},
-    {"nombre": "Papas", "precio": 3.00, "icono_menu": "imgs/papas.png"},
+    {"nombre": "Hamburguesa", "precio": 3500, "icono_menu": "imgs/hamburguesa.png"},
+    {"nombre": "Pepsi", "precio": 1100, "icono_menu": "imgs/pepsi.png"},
+    {"nombre": "Completos", "precio": 1800, "icono_menu": "imgs/completos.png"},
+    {"nombre": "Papas", "precio": 500, "icono_menu": "imgs/papas.png"},
 ]
 
 # Crear un diccionario para almacenar las imágenes
@@ -100,8 +101,11 @@ for item in menu:
     icono_menu = ctk.CTkImage(dark_image=imagen, size=(64, 64))
     item_copy = item.copy()
     item_copy["icono_menu"] = icono_menu
-    crear_tarjeta(item_copy, tarjetas_frame, pedido_treeview)
-
+    boton_tarjeta = ctk.CTkButton(tarjetas_frame, image=icono_menu, text=item["nombre"], 
+                                  compound="top", 
+                                  command=lambda nombre=item["nombre"], precio=item["precio"]: 
+                                  agregar_al_pedido(nombre, precio, pedido_treeview, label_total))
+    boton_tarjeta.pack(side="left", padx=10, pady=10)
 
 
 # etiqueta para mostrar el precio total
