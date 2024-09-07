@@ -1,6 +1,7 @@
 import os
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
+from datetime import datetime
 
 class generarBoleta:
     def __init__(self):
@@ -21,6 +22,9 @@ class generarBoleta:
         # Generar la ruta completa para el PDF
         ruta_pdf = os.path.join(self.carpeta_boletas, nombre_archivo)
 
+        # Obtener la fecha y hora actual
+        fecha_actual = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
         # Crear el archivo PDF
         c = canvas.Canvas(ruta_pdf, pagesize=A4)
         c.drawString(100, 800, "Boleta Restaurante")
@@ -28,7 +32,7 @@ class generarBoleta:
         c.drawString(100, 770, "RUT: 12345678-9")
         c.drawString(100, 755, "Dirección: Calle Falsa 123")
         c.drawString(100, 740, "Teléfono: +56 9 1234 5678")
-        c.drawString(400, 800, "Fecha: 22/08/2024 16:46:12")
+        c.drawString(400, 800, f"Fecha: {fecha_actual}")
 
         # Encabezados de la tabla
         x, y = 100, 700
@@ -51,8 +55,6 @@ class generarBoleta:
         iva = subtotal * 0.19
         total = subtotal + iva
 
-        c.drawString(100, y - 20, f"Subtotal: ${subtotal:,.2f}")
-        c.drawString(100, y - 40, f"IVA (19%): ${iva:,.2f}")
         c.drawString(100, y - 60, f"Total: ${total:,.2f}")
 
         c.drawString(100, y - 100, "Gracias por su compra. Para cualquier consulta, llámenos al +56 9 1234 5678.")

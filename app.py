@@ -3,8 +3,8 @@ from tkinter import ttk
 from PIL import Image
 from clases.agregarPedido import agregar_al_pedido
 from clases.clickTarjeta import tarjetaClick
-from clases.ingresarIngredientes import ingresarIngrediente
-from clases.eliminarIngrediente import eliminarIngrediente
+from clases.ingresarIngredientes import IngresarIngrediente
+from clases.eliminarIngrediente import EliminarIngrediente
 from clases.generarMenu import *
 from clases.crearTarjeta import crear_tarjeta
 from clases.generarBoleta import generarBoleta
@@ -52,12 +52,15 @@ entradaCantidad.grid(row=1, column=1, padx=10, pady=10)
 botonIngresarr = ctk.CTkButton(pestañaIngredientes, text="Ingresar Ingrediente", command=lambda: ingresoIng.ingresarIngrediente(entradaCantidad, entradaNombre, tablaAgregados))   
 botonIngresarr.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
-# tabla de ingredientes agregados
-tablaAgregados= ctk.CTkTextbox(pestañaIngredientes, width=400, height=200)
+# Configura el Treeview en lugar del CTkTextbox
+tablaAgregados = ttk.Treeview(pestañaIngredientes, columns=("Nombre", "Cantidad"), show="headings")
+tablaAgregados.heading("Nombre", text="Nombre del Ingrediente")
+tablaAgregados.heading("Cantidad", text="Cantidad")
 tablaAgregados.grid(row=0, column=2, rowspan=3, padx=10, pady=10)
 
 # botón eliminar ingredientes
-botonEliminar = ctk.CTkButton(pestañaIngredientes, text="Eliminar Ingrediente", command=lambda: eliminarIngrediente())
+Eliminar = EliminarIngrediente(tablaAgregados)
+botonEliminar = ctk.CTkButton(pestañaIngredientes, text="Eliminar Ingrediente", command=lambda: (Eliminar.seleccionar_fila(), Eliminar.eliminar_dato()))
 botonEliminar.grid(row=3, column=2, padx=10, pady=10)
 
 # botón generar menú
