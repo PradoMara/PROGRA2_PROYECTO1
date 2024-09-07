@@ -4,9 +4,13 @@ from PIL import Image
 from clases.clickTarjeta import tarjetaClick
 from clases.ingresarIngredientes import ingresarIngrediente
 from clases.eliminarIngrediente import eliminarIngrediente
-from clases.generarMenu import generarMenu
+from clases.generarMenu import *
 from clases.crearTarjeta import crear_tarjeta
 from clases.generarBoleta import generarBoleta
+
+# Configuración de la apariencia y tema
+ctk.set_appearance_mode("dark")  # Modos: "System", "Dark", "Light"
+ctk.set_default_color_theme("blue")  # Temas: "blue", "green", "dark-blue"
 
 app = ctk.CTk()
 app.title("Gestión de ingredientes y pedidos")
@@ -98,7 +102,8 @@ label_total = ctk.CTkLabel(pestañaPedidos, text="Total: $0.00", font=("Helvetic
 label_total.grid(row=2, column=0, padx=10, pady=10, sticky="e")
 
 # botongenerar boleta
-botonGenerarBoleta = ctk.CTkButton(pestañaPedidos, text="Generar Boleta", command=lambda: generarBoleta())
+Boleta = generarBoleta()
+botonGenerarBoleta = ctk.CTkButton(pestañaPedidos, text="Generar Boleta", command=Boleta.generaBoleta)
 botonGenerarBoleta.grid(row=3, column=0, padx=10, pady=10, sticky="e")
 
 #----------------------------------------------------------------------------------------------------------------------#
