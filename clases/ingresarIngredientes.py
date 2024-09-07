@@ -3,17 +3,18 @@ from clases.validacion import Validacion
 class IngresarIngrediente():
     
     def __init__(self):
-        pass
+        self.validado = Validacion()
 
     
     def ingresarIngrediente(self, entradaCantidad, entradaNombre, tablaAgregados):
-        validado = Validacion()
-        numero = entradaCantidad.get()
 
-        if validado.validarNumero(numero):
+        cantidad = entradaCantidad.get()
+        
+
+        if self.validado.validarNumero(cantidad):
             ingrediente_seleccionado = entradaNombre.get()
             if ingrediente_seleccionado:
-                tablaAgregados.insert("end", f"{ingrediente_seleccionado}: {numero}\n")
+                tablaAgregados.insert("end", f"{ingrediente_seleccionado}: {cantidad}\n")
             else:
                 print("Por favor, selecciona un ingrediente.")
         else:

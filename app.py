@@ -4,7 +4,7 @@ from PIL import Image
 from clases.clickTarjeta import tarjetaClick
 from clases.ingresarIngredientes import IngresarIngrediente
 from clases.eliminarIngrediente import eliminarIngrediente
-from clases.generarMenu import generarMenu
+from clases.generarMenu import GenerarMenu
 from clases.crearTarjeta import crear_tarjeta
 from clases.generarBoleta import generarBoleta
 
@@ -56,9 +56,6 @@ tablaAgregados.grid(row=0, column=2, rowspan=3, padx=10, pady=10)
 botonEliminar = ctk.CTkButton(pestañaIngredientes, text="Eliminar Ingrediente", command=lambda: eliminarIngrediente())
 botonEliminar.grid(row=3, column=2, padx=10, pady=10)
 
-# botón generar menú
-botonGenerarMenu = ctk.CTkButton(frame, text="Generar Menú", width=300, command=lambda: generarMenu())
-botonGenerarMenu.pack(pady=10)
 
 #----------------------------------------------------------------------------------------------------------------------#
 
@@ -105,6 +102,12 @@ for item in menu:
 # etiqueta para mostrar el precio total
 label_total = ctk.CTkLabel(pestañaPedidos, text="Total: $0.00", font=("Helvetica", 16, "bold"))
 label_total.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+
+generar_menu = GenerarMenu(pedido_treeview, label_total)
+
+# botón generar menú (ESTO VA EN LA PRIMERA PESTAÑA PERO SI NO LO DEJO AQUI NO FUNCIONA XD)
+botonGenerarMenu = ctk.CTkButton(frame, text="Generar Menú", width=300, command=lambda: generar_menu.generar_Menu(menu))
+botonGenerarMenu.pack(pady=10)
 
 # botongenerar boleta
 botonGenerarBoleta = ctk.CTkButton(pestañaPedidos, text="Generar Boleta", command=lambda: generarBoleta())
