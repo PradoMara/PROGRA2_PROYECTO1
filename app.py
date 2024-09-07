@@ -88,6 +88,8 @@ menu = [
 # Crear un diccionario para almacenar las imágenes
 imagenes_menus = []
 
+
+
 for item in menu:
     imagen = Image.open(item["icono_menu"])
     icono_menu = ctk.CTkImage(dark_image=imagen, size=(64, 64))
