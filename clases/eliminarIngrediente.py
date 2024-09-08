@@ -20,6 +20,6 @@ class EliminarIngrediente:
                 self.selected_row = None  # Limpiar la selección después de eliminar
             else:
                 # Crear un cuadro de advertencia usando Tkinter
-                messagebox.showwarning("Advertencia", "Por favor, selecciona una fila para eliminar.")
+                messagebox.showwarning("Advertencia", "Por favor, selecciona un ingrediente para eliminar.")
         except Exception as e:
             print(f"No se pudo eliminar la fila: {e}")

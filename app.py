@@ -8,6 +8,7 @@ from clases.eliminarIngrediente import EliminarIngrediente
 from clases.generarMenu import *
 from clases.crearTarjeta import crear_tarjeta
 from clases.generarBoleta import generarBoleta
+from clases.eliminarMenu import eliminarMenu
 
 #-----------------------------------------------------------------------------------------------------------------------#
 #------------------------------------------------- Instancia de la aplicación -----------------------------------------#
@@ -114,6 +115,11 @@ for item in menu:
 # etiqueta para mostrar el precio total
 label_total = ctk.CTkLabel(pestañaPedidos, text="Total: $0.00", font=("Helvetica", 16, "bold"))
 label_total.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+
+#Boton para eliminaar algo del menu
+EliminarMenu = eliminarMenu(pedido_treeview, label_total)
+botonEliminarMenu = ctk.CTkButton(pestañaPedidos, text="Eliminar Menu", command=lambda: (EliminarMenu.seleccionar_fila(), EliminarMenu.eliminar_menu()))
+botonEliminarMenu.grid(row=3, column=0, padx=180, pady=10, sticky="e")
 
 # botongenerar boleta
 Boleta = generarBoleta(pedido_treeview)
