@@ -116,7 +116,7 @@ label_total = ctk.CTkLabel(pestañaPedidos, text="Total: $0.00", font=("Helvetic
 label_total.grid(row=2, column=0, padx=10, pady=10, sticky="e")
 
 # botongenerar boleta
-Boleta = generarBoleta()
+Boleta = generarBoleta(pedido_treeview)
 botonGenerarBoleta = ctk.CTkButton(pestañaPedidos, text="Generar Boleta", command=Boleta.generar_boleta_evento)
 botonGenerarBoleta.grid(row=3, column=0, padx=10, pady=10, sticky="e")
 
