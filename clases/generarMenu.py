@@ -1,6 +1,6 @@
 # from app import * #NO ES NECESARIO ESTA LINEA, DE LO CONTRARIO DA ERROR
 
-
+#ijfibfsididi
 class GenerarMenu():
     def __init__(self, pedido_treeview, label_total):
         self.pedido_treeview = pedido_treeview
