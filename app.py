@@ -1,19 +1,24 @@
 import customtkinter as ctk
 from tkinter import ttk 
 from PIL import Image
+from clases.agregarPedido import agregar_al_pedido
 from clases.clickTarjeta import tarjetaClick
 from clases.ingresarIngredientes import IngresarIngrediente
-from clases.eliminarIngrediente import eliminarIngrediente
-from clases.generarMenu import GenerarMenu
+from clases.eliminarIngrediente import EliminarIngrediente
+from clases.generarMenu import *
 from clases.crearTarjeta import crear_tarjeta
 from clases.generarBoleta import generarBoleta
+from clases.eliminarMenu import eliminarMenu
 
 #-----------------------------------------------------------------------------------------------------------------------#
 #------------------------------------------------- Instancia de la aplicación -----------------------------------------#
 #-----------------------------------------------------------------------------------------------------------------------#
 
-ingresoIng = IngresarIngrediente()
+# Configuración de la apariencia y tema
+ctk.set_appearance_mode("dark")  # Modos: "System", "Dark", "Light"
+ctk.set_default_color_theme("blue")  # Temas: "blue", "green", "dark-blue"
 
+ingresoIng = IngresarIngrediente()
 
 app = ctk.CTk()
 app.title("Gestión de ingredientes y pedidos")
@@ -48,12 +53,15 @@ entradaCantidad.grid(row=1, column=1, padx=10, pady=10)
 botonIngresarr = ctk.CTkButton(pestañaIngredientes, text="Ingresar Ingrediente", command=lambda: ingresoIng.ingresarIngrediente(entradaCantidad, entradaNombre, tablaAgregados))   
 botonIngresarr.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
-# tabla de ingredientes agregados
-tablaAgregados= ctk.CTkTextbox(pestañaIngredientes, width=400, height=200)
+# Configura el Treeview en lugar del CTkTextbox
+tablaAgregados = ttk.Treeview(pestañaIngredientes, columns=("Nombre", "Cantidad"), show="headings")
+tablaAgregados.heading("Nombre", text="Nombre del Ingrediente")
+tablaAgregados.heading("Cantidad", text="Cantidad")
 tablaAgregados.grid(row=0, column=2, rowspan=3, padx=10, pady=10)
 
 # botón eliminar ingredientes
-botonEliminar = ctk.CTkButton(pestañaIngredientes, text="Eliminar Ingrediente", command=lambda: eliminarIngrediente())
+Eliminar = EliminarIngrediente(tablaAgregados)
+botonEliminar = ctk.CTkButton(pestañaIngredientes, text="Eliminar Ingrediente", command=lambda: (Eliminar.seleccionar_fila(), Eliminar.eliminar_dato()))
 botonEliminar.grid(row=3, column=2, padx=10, pady=10)
 
 
@@ -71,7 +79,6 @@ pedido_treeview.heading("Nombre del Menú", text="Nombre del Menú")
 pedido_treeview.heading("Cantidad", text="Cantidad")
 pedido_treeview.heading("Precio Unitario", text="Precio Unitario")
 pedido_treeview.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
-
 # Asegúrate de que la pestañaPedidos se expanda correctamente
 pestañaPedidos.grid_rowconfigure(0, weight=1)
 pestañaPedidos.grid_columnconfigure(0, weight=1)
@@ -81,10 +88,10 @@ pestañaPedidos.grid_columnconfigure(1, weight=1)
 
 # Crear las tarjetas de menú
 menu = [
-    {"nombre": "Hamburguesa", "precio": 5.00, "icono_menu": "imgs/hamburguesa.png"},
-    {"nombre": "Pepsi", "precio": 2.00, "icono_menu": "imgs/pepsi.png"},
-    {"nombre": "Completos", "precio": 3.00, "icono_menu": "imgs/completos.png"},
-    {"nombre": "Papas", "precio": 3.00, "icono_menu": "imgs/papas.png"},
+    {"nombre": "Hamburguesa", "precio": 3500, "icono_menu": "imgs/hamburguesa.png"},
+    {"nombre": "Pepsi", "precio": 1100, "icono_menu": "imgs/pepsi.png"},
+    {"nombre": "Completos", "precio": 1800, "icono_menu": "imgs/completos.png"},
+    {"nombre": "Papas", "precio": 500, "icono_menu": "imgs/papas.png"},
 ]
 
 # Crear un diccionario para almacenar las imágenes
@@ -95,22 +102,20 @@ for item in menu:
     icono_menu = ctk.CTkImage(dark_image=imagen, size=(64, 64))
     item_copy = item.copy()
     item_copy["icono_menu"] = icono_menu
-    crear_tarjeta(item_copy, tarjetas_frame, pedido_treeview)
-
+    boton_tarjeta = ctk.CTkButton(tarjetas_frame, image=icono_menu, text=item["nombre"], 
+                                  compound="top", 
+                                  command=lambda nombre=item["nombre"], precio=item["precio"]: 
+                                  agregar_al_pedido(nombre, precio, pedido_treeview, label_total))
+    boton_tarjeta.pack(side="left", padx=10, pady=10)
 
 
 # etiqueta para mostrar el precio total
 label_total = ctk.CTkLabel(pestañaPedidos, text="Total: $0.00", font=("Helvetica", 16, "bold"))
 label_total.grid(row=2, column=0, padx=10, pady=10, sticky="e")
 
-generar_menu = GenerarMenu(pedido_treeview, label_total)
-
-# botón generar menú (ESTO VA EN LA PRIMERA PESTAÑA PERO SI NO LO DEJO AQUI NO FUNCIONA XD)
-botonGenerarMenu = ctk.CTkButton(frame, text="Generar Menú", width=300, command=lambda: generar_menu.generar_Menu(menu))
-botonGenerarMenu.pack(pady=10)
-
 # botongenerar boleta
-botonGenerarBoleta = ctk.CTkButton(pestañaPedidos, text="Generar Boleta", command=lambda: generarBoleta())
+Boleta = generarBoleta(pedido_treeview)
+botonGenerarBoleta = ctk.CTkButton(pestañaPedidos, text="Generar Boleta", command=Boleta.generar_boleta_evento)
 botonGenerarBoleta.grid(row=3, column=0, padx=10, pady=10, sticky="e")
 
 #----------------------------------------------------------------------------------------------------------------------#

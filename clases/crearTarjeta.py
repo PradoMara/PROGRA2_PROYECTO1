@@ -15,8 +15,8 @@ def crear_tarjeta(menu, tarjetas_frame, pedido):
     tarjetas_frame.grid_rowconfigure(fila, weight=1)
     tarjetas_frame.grid_columnconfigure(columna, weight=1)
 
-    # Hacer que la tarjeta sea completamente clickeable 
     tarjeta.bind("<Button-1>", lambda event, m=menu: tarjetaClick(event, m))
+    # Hacer que la tarjeta sea completamente clickeable 
 
     # Cambiar el color del borde cuando el mouse pasa sobre la tarjeta
     tarjeta.bind("<Enter>", lambda event: tarjeta.configure(border_color="#FF0000"))  # Cambia a rojo al pasar el mouse
