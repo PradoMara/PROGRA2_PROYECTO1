@@ -1,5 +1,5 @@
 from clases.validacion import Validacion
-
+from tkinter import messagebox
 class IngresarIngrediente:
     
     def __init__(self):
@@ -25,6 +25,6 @@ class IngresarIngrediente:
                     # Si el ingrediente no existe, insertar una nueva fila
                     tablaAgregados.insert("", "end", values=(ingrediente_seleccionado, cantidad))
             else:
-                print("Por favor, selecciona un ingrediente.")
+                messagebox.showwarning("Advertencia", "Por favor, ingrese un ingrediente.")
         else:
-            print("Por favor, ingresa una cantidad válida.")
+            messagebox.showwarning("Advertencia", "El numero ingresado debe ser positivo.")

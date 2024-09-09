@@ -1,5 +1,4 @@
 import customtkinter as ctk
-from tkinter import messagebox
 
 class Validacion():
     def __init__(self):
@@ -13,7 +12,6 @@ class Validacion():
             else:
                 return False
         except ValueError:
-            messagebox.showwarning("Advertencia", "Ingresa un numero entero positivo.")
             return False
 
 
