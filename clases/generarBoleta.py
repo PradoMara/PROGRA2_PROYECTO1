@@ -2,8 +2,7 @@ import os
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from datetime import datetime
-import customtkinter as ctk
-from tkinter import ttk
+from tkinter import messagebox
 
 class generarBoleta:
     def __init__(self, pedido_treeview):
@@ -15,7 +14,7 @@ class generarBoleta:
             os.makedirs(self.carpeta_boletas)
 
     def obtener_datos_pedido(self):
-        # Obtener datos del Treeview de agregarPedidoy convertirlos en una lista
+        # Obtener datos del Treeview de agregarPedido y convertirlos en una lista
         datos = []  # Lista con los datos
         for item in self.pedido_treeview.get_children():
             item_values = self.pedido_treeview.item(item, "values")
@@ -64,8 +63,8 @@ class generarBoleta:
         iva = subtotal * 0.19
         total = subtotal + iva
 
-        c.drawString(100, y - 20, f"SubTotal; ${subtotal}")
-        c.drawString(100, y - 40, f"IVA (19%): ${iva}")
+        c.drawString(100, y - 20, f"SubTotal: ${subtotal:,.2f}")
+        c.drawString(100, y - 40, f"IVA (19%): ${iva:,.2f}")
         c.drawString(100, y - 60, f"Total: ${total:,.2f}")
 
         c.drawString(100, y - 100, "Gracias por su compra. Para cualquier consulta, llámenos al +56 9 1234 5678.")
@@ -75,5 +74,10 @@ class generarBoleta:
         print(f"PDF guardado en: {ruta_pdf}")
 
     def generar_boleta_evento(self):
-        # Método que será llamado por el botón para generar la boleta
+        # Verifica si hay datos en el Treeview
+        if not self.pedido_treeview.get_children():
+            messagebox.showwarning(title="Advertencia", message="No hay ningún pedido en el menú. Por favor, ingrese un pedido.")
+            return
+
+        # Llama al método para crear el PDF si hay datos
         self.crear_pdf("boleta.pdf")

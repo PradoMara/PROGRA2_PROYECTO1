@@ -33,6 +33,6 @@ class eliminarMenu:
                 self.label_total.configure(text=f"Total: ${nuevo_total:.2f}")
             else:
                 # Crear un cuadro de advertencia usando Tkinter
-                messagebox.showwarning("Advertencia", "Por favor, selecciona un menu para que sea eliminar.")
+                messagebox.showwarning("Advertencia", "Por favor, selecciona un menu para que sea eliminado.")
         except Exception as e:
             print(f"No se pudo eliminar la fila: {e}")

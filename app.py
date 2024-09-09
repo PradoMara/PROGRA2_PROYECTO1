@@ -64,12 +64,6 @@ Eliminar = EliminarIngrediente(tablaAgregados)
 botonEliminar = ctk.CTkButton(pestañaIngredientes, text="Eliminar Ingrediente", command=lambda: (Eliminar.seleccionar_fila(), Eliminar.eliminar_dato()))
 botonEliminar.grid(row=3, column=2, padx=10, pady=10)
 
-#Boton para eliminaar algo del menu
-EliminarMenu = eliminarMenu(tablaAgregados, )
-botonEliminarMenu = ctk.CTkButton(pestañaPedidos, text="Eliminar Menu", command=lambda: (EliminarMenu.seleccionar_fila(), EliminarMenu.eliminar_menu()))
-botonEliminarMenu.grid(row=3, column=0, padx=180, pady=10, sticky="e")
-
-
 
 #----------------------------------------------------------------------------------------------------------------------#
 
@@ -123,6 +117,11 @@ generar_menu = GenerarMenu(pedido_treeview, label_total)
 # botón generar menú (ESTO VA EN LA PRIMERA PESTAÑA PERO SI NO LO DEJO AQUI NO FUNCIONA XD)
 botonGenerarMenu = ctk.CTkButton(frame, text="Generar Menú", width=300, command=lambda: generar_menu.generar_Menu(menu))
 botonGenerarMenu.pack(pady=10)
+
+#Boton para eliminaar algo del menu
+EliminarMenu = eliminarMenu(pedido_treeview, label_total)
+botonEliminarMenu = ctk.CTkButton(pestañaPedidos, text="Eliminar Menu", command=lambda: (EliminarMenu.seleccionar_fila(), EliminarMenu.eliminar_menu()))
+botonEliminarMenu.grid(row=3, column=0, padx=180, pady=10, sticky="e")
 
 # botongenerar boleta
 Boleta = generarBoleta(pedido_treeview)
