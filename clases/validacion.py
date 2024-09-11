@@ -1,4 +1,3 @@
-import customtkinter as ctk
 
 class Validacion():
     def __init__(self):
@@ -13,5 +12,3 @@ class Validacion():
                 return False
         except ValueError:
             return False
-
-

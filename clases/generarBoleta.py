@@ -33,10 +33,10 @@ class generarBoleta:
         # Crear el archivo PDF
         c = canvas.Canvas(ruta_pdf, pagesize=A4)
         c.drawString(100, 800, "Boleta Restaurante")
-        c.drawString(100, 785, "Razón Social del Negocio")
+        c.drawString(100, 785, "Los LonkoPinin")
         c.drawString(100, 770, "RUT: 11222333-4")
-        c.drawString(100, 755, "Dirección: Calle Santiago Vespucio 69")
-        c.drawString(100, 740, "Teléfono: +56 9 1234 5678")
+        c.drawString(100, 755, "Dirección: Calle Las Mojojo 69")
+        c.drawString(100, 740, "Teléfono: +56 9 8765 4321")
         c.drawString(400, 800, f"Fecha: {fecha_actual}")
 
         # Encabezados de la tabla
@@ -67,7 +67,7 @@ class generarBoleta:
         c.drawString(100, y - 40, f"IVA (19%): ${iva:,.2f}")
         c.drawString(100, y - 60, f"Total: ${total:,.2f}")
 
-        c.drawString(100, y - 100, "Gracias por su compra. Para cualquier consulta, llámenos al +56 9 1234 5678.")
+        c.drawString(100, y - 100, "Gracias por su compra. Para cualquier consulta, llámenos al +56 9 8765 4321.")
         c.drawString(100, y - 120, "Los productos adquiridos no tienen garantía.")
 
         c.save()

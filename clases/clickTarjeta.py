@@ -13,7 +13,7 @@ def tarjetaClick(self, event, menu):
                         break
             if not suficiente_stock:
                 break
-        
+                
         if suficiente_stock:
             # Descontar los ingredientes del stock
             for ingrediente_necesario in menu.ingredientes:
@@ -33,10 +33,3 @@ def tarjetaClick(self, event, menu):
         else:
             # Mostrar un mensaje indicando que no hay suficientes ingredientes usando CTkMessagebox
             ctk.Messagebox(title="Stock Insuficiente", message=f"No hay suficientes ingredientes para preparar el menú '{menu.nombre}'.", icon="warning")
-
-
-
-
-
-
-
